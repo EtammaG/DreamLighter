@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etammag.dreamlighter.mapper.donor.mp.KidDonationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.donor.db.KidDonation">
+        <result column="donor_id" property="donorId" />
+        <result column="kid_id" property="kidId" />
+        <result column="amount" property="amount" />
+        <result column="time" property="time" />
+    </resultMap>
+
+    <select id="selectTotalAmount" resultType="java.lang.Integer">
+        select sum(amount) from donor_kid_donation
+    </select>
+    <select id="selectTotalAmountByKidId" resultType="java.lang.Integer">
+        select sum(amount) from donor_kid_donation where kid_id = #{kidId}
+    </select>
+    <select id="selectOneByKidId" resultType="com.etammag.dreamlighter.entity.donor.db.KidDonation">
+        select * from donor_kid_donation where kid_id = #{kidId} limit 1
+    </select>
+
+</mapper>

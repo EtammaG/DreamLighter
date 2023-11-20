@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etammag.dreamlighter.mapper.volunteer.mp.VolunteerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.volunteer.db.Volunteer">
+        <id column="id" property="id" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="birthday" property="birthday" />
+        <result column="area" property="area" />
+        <result column="job" property="job" />
+        <result column="hometown" property="hometown" />
+        <result column="photo" property="photo" />
+    </resultMap>
+
+</mapper>

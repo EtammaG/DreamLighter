@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etammag.dreamlighter.mapper.common.mp.ChatMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.common.db.Chat">
+        <result column="content" property="content"/>
+        <result column="from_id" property="fromId"/>
+        <result column="to_id" property="toId"/>
+        <result column="type" property="type"/>
+        <result column="time" property="time"/>
+    </resultMap>
+    <select id="selectAllMsgByBoth" resultType="java.lang.String">
+        select content
+        from chat
+        where to_id = #{toId}
+          and from_id = #{fromId}
+          and type = #{type}
+        order by time
+    </select>
+
+</mapper>

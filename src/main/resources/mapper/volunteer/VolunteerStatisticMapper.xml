@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etammag.dreamlighter.mapper.volunteer.VolunteerStatisticMapper">
+    <delete id="deleteLove">
+        delete from volun_article_love
+        where volun_id = #{volunId}
+          and article_id = #{articleId}
+
+
+    </delete>
+    <select id="newThingDonation" resultType="java.util.HashMap">
+
+        with temp as(
+            select  d.nickname,dkd.kid_id,dkd.thing_name,dkd.time
+            from donor_kid_thing as dkd,donor as d
+            where dkd.donor_id = d.id
+              and dkd.kid_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        )
+        select *
+        from temp
+        where time = (SELECT MAX(time) FROM temp)
+
+    </select>
+    <select id="newDonation" resultType="java.util.HashMap">
+
+        with temp as(
+            select  d.nickname,dkd.kid_id,dkd.amount,dkd.time
+            from donor_kid_donation as dkd,donor as d
+            where dkd.donor_id = d.id
+              and dkd.kid_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        )
+        select *
+        from temp
+        where time = (SELECT MAX(time) FROM temp)
+
+    </select>
+
+    <select id="submitCount" resultType="java.util.Map">
+
+        SELECT vm.mission_id, COALESCE(count(km.reply_id), 0) as count
+        FROM volun_to_mission AS vm
+        LEFT JOIN kid_to_mission AS km ON vm.mission_id = km.mission_id and km.reply_id IS NOT NULL
+        WHERE vm.volun_id = #{volunId}
+        group by vm.mission_id;
+
+    </select>
+
+    <select id="volunRandomMission" resultType="com.etammag.dreamlighter.entity.mission.db.Mission">
+        with temp as(
+            SELECT m.id, m.tag,m.title,m.description,m.type,m.level,m.point,m.date
+            FROM volun_to_mission AS vm,kid_mission AS m
+            WHERE vm.volun_id = #{volunId}
+              AND vm.mission_id = m.id
+        )
+        select*
+        from temp
+        where date =  (SELECT MAX(date) FROM temp)
+
+
+    </select>
+
+    <select id="hasCheck" resultType="java.util.Map">
+
+        select km.mission_id, count(kr.id) as count
+        from kid_to_mission as km,kid_reply as kr
+        where km.reply_id = kr.id
+        and km.mission_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and kr.score is not null
+        group by km.mission_id
+
+    </select>
+    <select id="volunAllMission" resultType="com.etammag.dreamlighter.entity.mission.db.Mission">
+        SELECT m.id as id, m.tag as tag,m.title as title,m.description as description,m.type as type,m.level as level,m.point as point,m.date as date
+        FROM volun_to_mission AS vm,kid_mission AS m
+        WHERE vm.volun_id = #{volunId}
+          AND vm.mission_id = m.id
+          ORDER BY m.date DESC
+    </select>
+    <select id="volunMissionKid" resultType="com.etammag.dreamlighter.entity.kid.KidVieDto">
+        SELECT k.id as kidId,k.photo as kidPic,k.name as kidName,kr.media replyFile
+        FROM kid_to_mission as km, kid as k , kid_reply as kr
+        WHERE km.mission_id = #{missionId}
+        AND km.kid_id = k.id
+        AND km.reply_id is not null
+        and kr.id = km.mission_id
+    </select>
+    <select id="allArticle" resultType="com.etammag.dreamlighter.entity.volunteer.ArticleDto">
+        SELECT va.id, va.author_name, va.content_pic, va.author_pic, va.title, va.content, va.article_time, COUNT(vac.article_id) AS amount
+        FROM volun_article AS va
+                 LEFT JOIN volun_article_comment AS vac ON va.id = vac.article_id
+        WHERE va.title LIKE #{title}
+        GROUP BY va.id
+    </select>
+
+    <select id="articleComment" resultType="com.etammag.dreamlighter.entity.common.CommentDto">
+
+        select vac.content,v.name,v.photo,vac.time
+        from volunteer as v ,volun_article_comment as vac
+        where v.id = vac.volun_id
+          and vac.volun_id = #{articleId}
+        order by vac.time desc
+
+
+    </select>
+    <select id="allArticleLike" resultType="com.etammag.dreamlighter.entity.volunteer.ArticleDto">
+
+        SELECT a.id, a.author_name, a.content_pic, a.author_pic, a.title, a.content, a.article_time, IFNULL(COUNT(vac.article_id), 0) AS amount
+        FROM volun_article AS a
+                 LEFT JOIN volun_article_like AS val ON a.id = val.article_id
+                 LEFT JOIN volun_article_comment AS vac ON vac.article_id = a.id
+        WHERE val.volun_id = #{volunId}
+        GROUP BY a.id
+        ORDER BY a.article_time DESC
+
+
+    </select>
+    <select id="volunKid" resultType="com.etammag.dreamlighter.entity.kid.db.Kid">
+
+        SELECT *
+        FROM kid
+        WHERE EXISTS (
+                      SELECT vk.kid_id
+                      FROM volun_to_kid AS vk
+                      WHERE vk.volun_id = #{volunId} AND vk.kid_id = kid.id
+                  )
+
+    </select>
+    <select id="getIfLove" resultType="java.lang.Long">
+        select count(*)
+        from volun_article_love as val
+        where val.volun_id = #{volunId}
+          and val.article_id = #{articleId}
+
+    </select>
+    <select id="loveCount" resultType="java.lang.Long">
+
+        select count(*)
+        from volun_article_love as val
+          where val.article_id = #{articleId}
+
+    </select>
+
+
+    <select id="inputLove">
+        INSERT INTO volun_article_love
+        VALUES (#{volunId},#{articleId},1);
+    </select>
+    <select id="hasCheckAll" resultType="java.util.Map">
+
+<!--        select km.mission_id, count(kr.id) as count-->
+<!--        from kid_to_mission as km,kid_reply as kr-->
+<!--        where km.reply_id = kr.id-->
+<!--        and kr.score is not null-->
+<!--        group by km.mission_id-->
+        SELECT km.mission_id, COALESCE(count(kr.id), 0) as count
+        FROM kid_to_mission as km
+        LEFT JOIN kid_reply as kr ON km.reply_id = kr.id and kr.score is not null
+        group by km.mission_id;
+
+    </select>
+
+
+</mapper>

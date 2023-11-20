@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.kid.AwardInfoMapper">
+
+    <select id="search" resultType="com.etammag.dreamlighter.entity.kid.AwardDto">
+        select a.*, exists(select 1 from kid_award_like where award_id = a.id and kid_id = #{id}) liked
+        from kid_award a
+        join kid_award_to_type t
+        on a.id = t.award_id
+        where
+        t.type_id = #{typeId}
+        <if test="name != null">
+            and a.name like #{name}
+        </if>
+    </select>
+
+    <select id="selectLike" resultType="com.etammag.dreamlighter.entity.kid.db.Award">
+        select a.*
+        from kid_award_like l
+        join kid_award a
+        on l.award_id = a.id
+        where l.kid_id = #{id}
+    </select>
+    <select id="selectExchanges" resultType="com.etammag.dreamlighter.entity.kid.AwardExchangeDto">
+        select name, description, pic, point, address, time
+        from kid_award_exchange e
+        join kid_award a
+            on a.id = e.award_id
+        where e.kid_id = #{id}
+    </select>
+
+
+</mapper>

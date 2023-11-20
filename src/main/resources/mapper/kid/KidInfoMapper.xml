@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.kid.KidInfoMapper">
+
+    <select id="selectSimByTypeId" resultType="com.etammag.dreamlighter.entity.kid.KidSimDto">
+        select id, name, age, photo, description, address
+        from kid k
+        join kid_to_type t
+        on k.id = t.kid_id
+        where t.type_id = #{typeId}
+    </select>
+
+    <select id="selectSim" resultType="com.etammag.dreamlighter.entity.kid.KidSimDto">
+        select id, name, age, photo, description, address from kid
+    </select>
+
+    <select id="selectMisInfo" resultType="java.util.Map">
+        select m.type, t.reply_id
+        from kid_to_mission t
+        join kid_mission m
+            on m.id = t.mission_id
+        where t.kid_id = 1
+    </select>
+    <select id="selectMalInfo" resultType="com.etammag.dreamlighter.entity.kid.KidMalDto">
+        select mall_point from kid where id = #{id}
+    </select>
+    <select id="selectRankById" resultType="java.lang.Integer">
+        select `rank`
+        from (select id, dense_rank() over (order by total_point desc ) `rank` from kid) x
+        where id = #{id}
+    </select>
+    <select id="selectWeekrankById" resultType="java.lang.Integer">
+        select `rank`
+        from (select id, dense_rank() over (order by total_point - point_week_ago desc ) `rank` from kid) x
+        where id = #{id}
+    </select>
+
+
+</mapper>

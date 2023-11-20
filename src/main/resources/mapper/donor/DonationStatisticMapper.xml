@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.donor.DonationStatisticMapper">
+
+    <sql id="selectStaFromKidDonation">
+        select donor_id, count(amount) c, sum(amount) s from donor_kid_donation
+    </sql>
+
+    <sql id="selectStaFromProjectDonation">
+        select donor_id, count(amount) c, sum(amount) s from donor_project_donation p
+    </sql>
+
+    <select id="selectSta" resultType="com.etammag.dreamlighter.entity.donor.DonationStaDto">
+        select id `donorId`, nickname, times, amount, `rank`
+        from (select id, nickname, times, amount, @Noo := @Noo + 1 as `rank`
+            from (
+                select d.id, d.nickname, k.c + p.c times, k.s + p.s amount
+                    from (<include refid="selectStaFromKidDonation"/> group by donor_id) as k
+                    join (<include refid="selectStaFromProjectDonation"/> group by donor_id) as p
+                        on k.donor_id = p.donor_id
+                    join donor d
+                        on k.donor_id = d.id
+                    join (select @Noo := 0) as n
+                order by amount desc
+            ) x
+        ) y
+        where id = #{donorId}
+    </select>
+
+    <select id="selectRank" resultType="com.etammag.dreamlighter.entity.donor.DonationStaDto">
+        select d.id `donorId`, d.nickname, k.c + p.c times, k.s + p.s amount, 0 `rank`
+            from (<include refid="selectStaFromKidDonation"/> group by donor_id) as k
+            join (<include refid="selectStaFromProjectDonation"/> group by donor_id) as p
+                on k.donor_id = p.donor_id
+            join donor d
+                on k.donor_id = d.id
+        order by amount desc
+        limit #{num}
+    </select>
+
+    <select id="selectRankByDate" resultType="com.etammag.dreamlighter.entity.donor.DonationStaDto">
+        select d.id `donorId`, d.nickname, k.c + p.c times, k.s + p.s amount, 0 `rank`
+            from (<include refid="selectStaFromKidDonation"/> where time between #{startDate} and #{endDate} group by donor_id) as k
+            join (<include refid="selectStaFromProjectDonation"/> where time between #{startDate} and #{endDate} group by donor_id) as p
+                on k.donor_id = p.donor_id
+            join donor d
+                on k.donor_id = d.id
+        order by amount desc
+        limit #{num}
+    </select>
+
+    <select id="selectNumOfKid" resultType="java.lang.Integer">
+        select count(distinct kid_id)
+        from (
+            (select kid_id from donor_kid_donation)
+            union
+            (select kid_id from donor_kid_thing)
+        ) x
+    </select>
+
+    <select id="selectSta2" resultType="com.etammag.dreamlighter.entity.donor.DonationStaDto">
+        select d.id `donorId`, d.nickname, a.c + b.c `times`, a.s + b.s `amount`, 0 `rank`
+        from (select count(amount) c, sum(amount) s from donor_kid_donation where donor_id = #{donorId}) a
+        join (select count(amount) c, sum(amount) s from donor_project_donation where donor_id = #{donorId}) b
+        join donor d
+        where d.id = #{donorId};
+    </select>
+
+    <select id="selectSta2ByDate" resultType="com.etammag.dreamlighter.entity.donor.DonationStaDto">
+        select d.id `donorId`, d.nickname, a.c + b.c `times`, a.s + b.s `amount`, 0 `rank`
+        from (select count(amount) c, sum(amount) s from donor_kid_donation where donor_id = #{donorId} and time between #{startDate} and #{endDate}) a
+        join (select count(amount) c, sum(amount) s from donor_project_donation where donor_id = #{donorId} and time between #{startDate} and #{endDate}) b
+        join donor d
+        where d.id = #{donorId};
+    </select>
+
+</mapper>

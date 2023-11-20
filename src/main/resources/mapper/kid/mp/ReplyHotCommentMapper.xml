@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etammag.dreamlighter.mapper.kid.mp.ReplyHotCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.kid.db.ReplyHotComment">
+        <result column="hot_id" property="hotId" />
+        <result column="kid_id" property="kidId" />
+        <result column="content" property="content" />
+    </resultMap>
+
+    <select id="selectAll" resultType="com.etammag.dreamlighter.entity.kid.db.ReplyHotComment">
+        select *
+        from kid_reply_hot_comment
+    </select>
+
+    <insert id="insertAll">
+        insert into kid_reply_hot_comment (hot_id, kid_id, content)
+        values
+        <foreach collection="comments" item="item" index="index" separator=",">
+            (#{item.hotId}, #{item.kidId}, #{item.content})
+        </foreach>
+    </insert>
+
+    <delete id="deleteAll">
+        delete from kid_reply_hot_comment
+    </delete>
+
+</mapper>

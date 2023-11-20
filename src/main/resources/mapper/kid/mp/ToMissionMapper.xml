@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etammag.dreamlighter.mapper.kid.mp.ToMissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.kid.db.ToMission">
+        <result column="kid_id" property="kidId" />
+        <result column="mission_id" property="missionId" />
+        <result column="reply_id" property="replyId" />
+    </resultMap>
+
+    <insert id="updateReply">
+        update kid_to_mission
+        set reply_id = #{replyId}
+        where kid_id = #{kidId}
+        and mission_id = #{missionId};
+    </insert>
+
+</mapper>

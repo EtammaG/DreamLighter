@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.donor.ProjectInfoMapper">
+
+
+    <select id="selectSimByType" resultType="com.etammag.dreamlighter.entity.donor.ProjectSimDto">
+        select id, name, description, pic, location
+        from donor_project p
+        join donor_project_to_type t
+            on p.id = t.project_id
+        where t.type_id = #{typeId}
+    </select>
+    <select id="selectSim" resultType="com.etammag.dreamlighter.entity.donor.ProjectSimDto">
+        select id, name, description, pic, location from donor_project
+    </select>
+
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.kid.ReplyInfoMapper">
+
+    <select id="selectByKidIdAndMissionId" resultType="com.etammag.dreamlighter.entity.kid.db.Reply">
+        select id, media, score, comment
+        from kid_reply r
+        join kid_to_mission t
+            on r.id = reply_id
+        where t.mission_id = #{missionId}
+        and t.kid_id = #{kidId}
+    </select>
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etammag.dreamlighter.mapper.donor.mp.ProjectDonationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.donor.db.ProjectDonation">
+        <result column="project_id" property="projectId" />
+        <result column="donor_id" property="donorId" />
+        <result column="amount" property="amount" />
+        <result column="time" property="time" />
+    </resultMap>
+
+    <select id="selectTotalAmount" resultType="java.lang.Integer">
+        select sum(amount) from donor_project_donation
+    </select>
+
+</mapper>

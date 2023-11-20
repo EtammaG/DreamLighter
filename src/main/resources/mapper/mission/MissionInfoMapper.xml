@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.mission.MissionInfoMapper">
+
+    <select id="selectKidViewByKidIdAndDate" resultType="java.util.Map">
+        select mission_id, tag, type, point, reply_id, score
+        from kid_mission m
+        join kid_to_mission t
+        on m.id = t.mission_id
+        left join kid_reply r
+        on r.id = t.reply_id
+        where t.kid_id = #{kidId} and date = #{date}
+    </select>
+
+    <select id="selectReplyIds" resultType="java.lang.Long">
+        select reply_id
+        from kid_to_mission
+        where mission_id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.kid.HotReplyMapper">
+
+    <select id="selectAll" resultType="com.etammag.dreamlighter.entity.kid.HotReplyDto">
+        select hot.id                                                                                hotId,
+               kid.name                                                                              kidName,
+               mis.date,
+               mis.title,
+               mis.description,
+               mis.level,
+               rep.media,
+               rep.score,
+               rep.comment
+<!--               exists(select 1 from kid_reply_hot_like lik where lik.hot_id = hot.id and kid_id = 1) liked,-->
+<!--               (select count(*) from kid_reply_hot_like lik where lik.hot_id = hot.id)               likeNum-->
+        from kid_to_mission ktm
+                 join kid_reply_hot hot
+                      on hot.reply_id = ktm.reply_id
+                 join kid
+                      on kid.id = ktm.kid_id
+                 join kid_mission mis
+                      on mis.id = ktm.mission_id
+                 join kid_reply rep
+                      on rep.id = ktm.reply_id
+    </select>
+
+    <select id="selectCommentsByHotId" resultType="com.etammag.dreamlighter.entity.common.CommentDto">
+        select com.content, kid.name, kid.photo, com.time
+        from kid_reply_hot_comment com
+        join kid
+        on com.kid_id = kid.id
+        where com.hot_id = #{hotId}
+    </select>
+
+    <select id="selectAllComments" resultType="com.etammag.dreamlighter.entity.common.Comment">
+        select com.hot_id, com.content, kid.name, kid.photo, com.time
+        from kid_reply_hot_comment com
+        join kid
+        on com.kid_id = kid.id
+    </select>
+
+    <!--    <select id="findLike" resultType="java.lang.Long">-->
+<!--        select hot_id-->
+<!--        from kid_reply_hot_like-->
+<!--        where hot_id in-->
+<!--        <foreach collection="hotIds" item="hotId" open="(" separator="," close=")">-->
+<!--            #{hotId}-->
+<!--        </foreach>-->
+<!--        and kid_id = #{id}-->
+<!--    </select>-->
+</mapper>

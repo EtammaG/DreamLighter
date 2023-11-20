@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.donor.DonationMapper">
+
+    <select id="selectKidDonation" resultType="com.etammag.dreamlighter.entity.donor.KidDonationDto">
+        select d.donor_id, d.kid_id, d.amount, d.time, k.name `kidName`, k.photo `kidPhoto`
+        from donor_kid_donation d
+        join kid k
+        on d.kid_id = k.id
+        where d.donor_id = #{donorId}
+    </select>
+
+    <select id="selectKidThing" resultType="com.etammag.dreamlighter.entity.donor.KidThingDto">
+        select t.donor_id, t.kid_id, t.thing_name, t.time, k.name `kidName`, k.photo `kidPhoto`
+        from donor_kid_thing t
+        join kid k
+        on t.kid_id = k.id
+        where t.donor_id = #{donorId}
+    </select>
+
+    <select id="selectProjectDonation" resultType="com.etammag.dreamlighter.entity.donor.ProjectDonationDto">
+        select d.project_id, d.donor_id, d.amount, d.time, p.name `projectName`, p.pic `projectPic`
+        from donor_project_donation d
+        join donor_project p
+        on d.project_id = p.id
+        where d.donor_id = #{donorId}
+    </select>
+
+</mapper>
