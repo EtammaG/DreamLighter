@@ -1,4 +1,4 @@
-package com.etammag.dreamlighter.common.config;
+package com.etammag.dreamlighter.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

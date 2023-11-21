@@ -1,7 +1,7 @@
-package com.etammag.dreamlighter.common.config;
+package com.etammag.dreamlighter.config;
 
-import com.etammag.dreamlighter.common.exception.FilterExceptionFilter;
-import com.etammag.dreamlighter.common.JwtAuthTokenFilter;
+import com.etammag.icommon.exception.FilterExceptionFilter;
+import com.etammag.icommon.security.JwtAuthTokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

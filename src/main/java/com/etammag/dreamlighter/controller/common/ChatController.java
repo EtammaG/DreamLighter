@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.common;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.service.common.ChatService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

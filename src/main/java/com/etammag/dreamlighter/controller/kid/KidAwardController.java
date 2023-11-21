@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.kid;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.AwardDto;
 import com.etammag.dreamlighter.entity.kid.AwardExchangeDto;
 import com.etammag.dreamlighter.entity.kid.db.Award;

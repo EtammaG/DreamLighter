@@ -14,7 +14,7 @@ import com.etammag.dreamlighter.mapper.kid.KidInfoMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.SchoolMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.TypeMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.kid.KidInfoService;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;

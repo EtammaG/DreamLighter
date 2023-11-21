@@ -1,11 +1,11 @@
 package com.etammag.dreamlighter.service.common.impl;
 
-import com.etammag.dreamlighter.common.exception.CustomException;
+import com.etammag.icommon.exception.CustomException;
 import com.etammag.dreamlighter.entity.common.db.Chat;
-import com.etammag.dreamlighter.entity.current.BaseInfo;
+import com.etammag.icommon.entity.BaseInfo;
 import com.etammag.dreamlighter.mapper.common.mp.ChatMapper;
 import com.etammag.dreamlighter.service.common.ChatService;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

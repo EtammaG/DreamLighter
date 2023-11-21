@@ -12,7 +12,7 @@ import com.etammag.dreamlighter.mapper.donor.DonationStatisticMapper;
 import com.etammag.dreamlighter.mapper.donor.mp.KidDonationMapper;
 import com.etammag.dreamlighter.mapper.donor.mp.KidThingMapper;
 import com.etammag.dreamlighter.mapper.donor.mp.ProjectDonationMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.donor.DonorDonationRankService;
 import com.etammag.dreamlighter.service.donor.DonorDonationService;
 import com.etammag.pagehelper.IPage;

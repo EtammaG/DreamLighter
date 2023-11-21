@@ -1,8 +1,8 @@
 package com.etammag.dreamlighter.service.user.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.etammag.dreamlighter.common.exception.CustomException;
-import com.etammag.dreamlighter.entity.current.BaseInfo;
+import com.etammag.icommon.exception.CustomException;
+import com.etammag.icommon.entity.BaseInfo;
 import com.etammag.dreamlighter.entity.user.IUserDetails;
 import com.etammag.dreamlighter.entity.user.db.UserKid;
 import com.etammag.dreamlighter.mapper.user.mp.UserKidMapper;

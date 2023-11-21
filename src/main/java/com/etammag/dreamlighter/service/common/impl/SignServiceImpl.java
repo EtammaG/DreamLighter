@@ -1,11 +1,11 @@
 package com.etammag.dreamlighter.service.common.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.etammag.dreamlighter.common.utils.JwtUtil;
-import com.etammag.dreamlighter.entity.current.BaseInfo;
+import com.etammag.icommon.utils.JwtUtil;
+import com.etammag.icommon.entity.BaseInfo;
 import com.etammag.dreamlighter.entity.user.IUserDetails;
 import com.etammag.dreamlighter.service.common.SignService;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;

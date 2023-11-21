@@ -6,7 +6,7 @@ import com.etammag.dreamlighter.entity.mission.MissionKidViewDto;
 import com.etammag.dreamlighter.entity.mission.db.Mission;
 import com.etammag.dreamlighter.mapper.mission.MissionInfoMapper;
 import com.etammag.dreamlighter.mapper.mission.mp.MissionMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.mission.MissionInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

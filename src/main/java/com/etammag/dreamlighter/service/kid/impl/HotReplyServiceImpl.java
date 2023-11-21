@@ -2,7 +2,7 @@ package com.etammag.dreamlighter.service.kid.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.etammag.dreamlighter.common.exception.CustomException;
+import com.etammag.icommon.exception.CustomException;
 import com.etammag.dreamlighter.entity.common.Comment;
 import com.etammag.dreamlighter.entity.common.CommentDto;
 import com.etammag.dreamlighter.entity.kid.HotReplyDto;
@@ -13,7 +13,7 @@ import com.etammag.dreamlighter.mapper.kid.HotReplyMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyHotCommentMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyHotLikeMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.kid.HotReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

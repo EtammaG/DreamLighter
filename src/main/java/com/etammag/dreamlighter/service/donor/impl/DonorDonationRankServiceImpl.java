@@ -1,7 +1,7 @@
 package com.etammag.dreamlighter.service.donor.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.etammag.dreamlighter.common.utils.redis.CacheUtil;
+import com.etammag.icommon.utils.redis.CacheUtil;
 import com.etammag.dreamlighter.entity.donor.DonationStaDto;
 import com.etammag.dreamlighter.mapper.donor.DonationStatisticMapper;
 import com.etammag.dreamlighter.service.donor.DonorDonationRankService;

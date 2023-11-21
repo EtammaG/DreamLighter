@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.kid;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.KidMalDto;
 import com.etammag.dreamlighter.entity.kid.KidMeeDto;
 import com.etammag.dreamlighter.entity.kid.KidMisDto;

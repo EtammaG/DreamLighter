@@ -24,6 +24,7 @@ spring:
         max-wait: -1ms
         max-idle: 8
         min-idle: 0
+    database: 0
   servlet:
     multipart:
       max-file-size: 50MB
@@ -66,8 +67,9 @@ dream-lighter:
       award: 'kid:award:'
     hot:
       reply: 'hot:reply:'
-    limit-id: 'limit:id:'
-    limit-ip: 'limit:ip:'
+    limit:
+      id: 'limit:id:'
+      ip: 'limit:ip:'
     login-donor: 'login:donor:'
     login-kid: 'login:kid:'
     login-volunteer: 'login:volunteer:'

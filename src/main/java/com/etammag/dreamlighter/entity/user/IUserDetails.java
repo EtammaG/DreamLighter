@@ -1,7 +1,7 @@
 package com.etammag.dreamlighter.entity.user;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.etammag.dreamlighter.entity.current.BaseInfo;
+import com.etammag.icommon.entity.BaseInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

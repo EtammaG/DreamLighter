@@ -1,6 +1,6 @@
-package com.etammag.dreamlighter.common.config;
+package com.etammag.dreamlighter.config;
 
-import com.etammag.dreamlighter.common.mvc.JacksonObjectMapper;
+import com.etammag.icommon.mvc.JacksonObjectMapper;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

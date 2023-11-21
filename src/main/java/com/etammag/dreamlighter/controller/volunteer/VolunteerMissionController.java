@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.volunteer;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.KidVieDto;
 import com.etammag.dreamlighter.entity.mission.MissionDto;
 import com.etammag.dreamlighter.entity.mission.MissionVolViewDto;

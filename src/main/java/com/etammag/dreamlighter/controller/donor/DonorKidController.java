@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.donor;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.common.ITypePage;
 import com.etammag.dreamlighter.entity.kid.KidDto;
 import com.etammag.dreamlighter.entity.kid.KidRecDto;

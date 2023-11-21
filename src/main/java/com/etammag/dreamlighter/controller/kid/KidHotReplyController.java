@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.kid;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.common.CommentDto;
 import com.etammag.dreamlighter.entity.kid.HotReplyDto;
 import com.etammag.dreamlighter.service.kid.HotReplyService;

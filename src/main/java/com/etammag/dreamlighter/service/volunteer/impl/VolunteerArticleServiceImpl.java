@@ -11,7 +11,7 @@ import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleCommentMapper;
 import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleLikeMapper;
 import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleMapper;
 import com.etammag.dreamlighter.mapper.volunteer.mp.VolunteerMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.volunteer.VolunteerArticleService;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;

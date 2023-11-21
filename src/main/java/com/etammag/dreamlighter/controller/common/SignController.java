@@ -1,7 +1,7 @@
 package com.etammag.dreamlighter.controller.common;
 
-import com.etammag.dreamlighter.common.annotation.limit.IpLimit;
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.limit.IpLimit;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.service.common.SignService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

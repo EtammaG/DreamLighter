@@ -1,12 +1,12 @@
 package com.etammag.dreamlighter.service.kid.impl;
 
-import com.etammag.dreamlighter.common.utils.IdWorker;
+import com.etammag.icommon.utils.IdWorker;
 import com.etammag.dreamlighter.entity.kid.db.Reply;
 import com.etammag.dreamlighter.entity.kid.db.ToMission;
 import com.etammag.dreamlighter.mapper.kid.ReplyInfoMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ToMissionMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.kid.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

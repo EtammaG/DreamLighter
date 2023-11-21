@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.donor;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.common.DesDto;
 import com.etammag.dreamlighter.service.common.HotService;
 import io.swagger.annotations.Api;

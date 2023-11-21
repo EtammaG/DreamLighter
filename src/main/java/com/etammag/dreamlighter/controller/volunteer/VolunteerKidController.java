@@ -1,6 +1,6 @@
 package com.etammag.dreamlighter.controller.volunteer;
 
-import com.etammag.dreamlighter.common.entity.Result;
+import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.KidRecDto;
 import com.etammag.dreamlighter.entity.kid.db.Kid;
 import com.etammag.dreamlighter.service.volunteer.VolunteerKidService;

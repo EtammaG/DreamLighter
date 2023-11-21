@@ -1,8 +1,8 @@
 package com.etammag.dreamlighter.service.kid.impl;
 
-import com.etammag.dreamlighter.common.BaseInfoContext;
-import com.etammag.dreamlighter.common.exception.CustomException;
-import com.etammag.dreamlighter.common.utils.redis.CacheUtil;
+import com.etammag.icommon.context.BaseInfoContext;
+import com.etammag.icommon.exception.CustomException;
+import com.etammag.icommon.utils.redis.CacheUtil;
 import com.etammag.dreamlighter.entity.kid.AwardDto;
 import com.etammag.dreamlighter.entity.kid.AwardExchangeDto;
 import com.etammag.dreamlighter.entity.kid.db.*;

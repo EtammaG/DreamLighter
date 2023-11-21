@@ -6,7 +6,7 @@ import com.etammag.dreamlighter.entity.kid.db.Kid;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.mapper.volunteer.VolunteerStatisticMapper;
 import com.etammag.dreamlighter.mapper.volunteer.mp.VolunToKidMapper;
-import com.etammag.dreamlighter.common.BaseInfoContext;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.volunteer.VolunteerKidService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
