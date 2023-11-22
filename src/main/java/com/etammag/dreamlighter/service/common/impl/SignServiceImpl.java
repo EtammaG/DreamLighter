@@ -77,10 +77,6 @@ public class SignServiceImpl implements SignService {
     }
 
     @Override
-    public void logout() {
-        logout(BaseInfoContext.get());
-    }
-
     public void logout(BaseInfo baseInfo) {
         String keyPrefix;
         switch (baseInfo.getType()) {

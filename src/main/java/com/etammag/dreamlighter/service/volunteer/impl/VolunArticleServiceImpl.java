@@ -7,8 +7,10 @@ import com.etammag.dreamlighter.entity.volunteer.db.ArticleComment;
 import com.etammag.dreamlighter.entity.volunteer.db.ArticleLike;
 import com.etammag.dreamlighter.entity.volunteer.db.ArticleLove;
 import com.etammag.dreamlighter.mapper.volunteer.ArticleDetailMapper;
-import com.etammag.dreamlighter.mapper.volunteer.mp.*;
-import com.etammag.icommon.context.BaseInfoContext;
+import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleCommentMapper;
+import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleLikeMapper;
+import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleLoveMapper;
+import com.etammag.dreamlighter.mapper.volunteer.mp.ArticleMapper;
 import com.etammag.dreamlighter.service.volunteer.VolunArticleService;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
@@ -58,13 +60,13 @@ public class VolunArticleServiceImpl implements VolunArticleService {
         return toDetail(articleMapper.selectById(id));
     }
 
-    private ArticleDto toDetail(Article article) {
+    private ArticleDto toDetail(Long volunId, Article article) {
         Map<String, Object> det =  articleDetailMapper.selectDetById(article.getId());
         ArticleDto articleDto = new ArticleDto();
         BeanUtils.copyProperties(article, articleDto);
         articleDto.setLikeNum((Integer) det.get("likeNum"));
         articleDto.setCommentNum((Integer) det.get("commentNum"));
-        articleDto.setLiked(articleLikeMapper.catLike(BaseInfoContext.get().getId(), article.getId()) != null);
+        articleDto.setLiked(articleLikeMapper.catLike(volunId, article.getId()) != null);
         return articleDto;
     }
 
@@ -74,33 +76,33 @@ public class VolunArticleServiceImpl implements VolunArticleService {
     }
 
     @Override
-    public void addComment(Long articleId, String content) {
-        commentMapper.insert(new ArticleComment(articleId, BaseInfoContext.get().getId(), content, LocalDateTime.now()));
+    public void addComment(Long volunId, Long articleId, String content) {
+        commentMapper.insert(new ArticleComment(articleId, volunId, content, LocalDateTime.now()));
     }
 
     @Override
-    public IPageInfo<Article> pageFavors(IPage iPage) {
-        return articleDetailMapper.selectFavorsByVolunIdP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<Article> pageFavors(IPage iPage, Long volunId) {
+        return articleDetailMapper.selectFavorsByVolunIdP(iPage, volunId);
     }
 
     @Override
-    public void addFavor(Long articleId) {
-        articleLoveMapper.insert(new ArticleLove(BaseInfoContext.get().getId(), articleId));
+    public void addFavor(Long volunId, Long articleId) {
+        articleLoveMapper.insert(new ArticleLove(volunId, articleId));
     }
 
     @Override
-    public void delFavor(Long articleId) {
-        articleLoveMapper.delete(new ArticleLove(BaseInfoContext.get().getId(), articleId));
+    public void delFavor(Long volunId, Long articleId) {
+        articleLoveMapper.delete(new ArticleLove(volunId, articleId));
     }
 
     @Override
-    public void addLike(Long articleId) {
-        articleLikeMapper.insert(new ArticleLike(BaseInfoContext.get().getId(), articleId));
+    public void addLike(Long volunId, Long articleId) {
+        articleLikeMapper.insert(new ArticleLike(volunId, articleId));
     }
 
     @Override
-    public void delLike(Long articleId) {
-        articleLikeMapper.delete(new ArticleLike(BaseInfoContext.get().getId(), articleId));
+    public void delLike(Long volunId, Long articleId) {
+        articleLikeMapper.delete(new ArticleLike(volunId, articleId));
     }
 
 }

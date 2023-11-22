@@ -1,8 +1,9 @@
 package com.etammag.dreamlighter.controller.volunteer;
 
-import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.volunteer.db.Volunteer;
 import com.etammag.dreamlighter.service.volunteer.VolunInfoService;
+import com.etammag.icommon.context.BaseInfoContext;
+import com.etammag.icommon.entity.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class VolunInfoController {
     @GetMapping(value = "/info")
     @ApiOperation(value = "志愿者信息")
     public Result<Volunteer> getVolunInfo() {
-        return Result.success(volunInfoService.getVolunteerInfo());
+        return Result.success(volunInfoService.getVolunteerInfo(BaseInfoContext.get().getId()));
     }
 
 }

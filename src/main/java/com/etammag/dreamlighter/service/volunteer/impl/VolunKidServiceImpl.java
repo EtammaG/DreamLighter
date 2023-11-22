@@ -3,7 +3,6 @@ package com.etammag.dreamlighter.service.volunteer.impl;
 import com.etammag.dreamlighter.entity.kid.db.Kid;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.service.volunteer.VolunKidService;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class VolunKidServiceImpl implements VolunKidService {
     }
 
     @Override
-    public IPageInfo<Kid> pageAll(IPage iPage) {
-        return kidMapper.selectByVolunIdP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<Kid> pageAll(IPage iPage, Long volunId) {
+        return kidMapper.selectByVolunIdP(iPage, volunId);
     }
 }

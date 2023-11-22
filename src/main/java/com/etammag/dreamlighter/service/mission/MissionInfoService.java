@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MissionInfoService {
-    List<MissionKidViewDto> getKidViewByKidIdAndDate(LocalDate date);
+    List<MissionKidViewDto> getKidViewByKidIdAndDate(Long kidId, LocalDate date);
 
     MissionDto getById(Long id);
 }

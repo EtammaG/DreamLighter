@@ -2,7 +2,6 @@ package com.etammag.dreamlighter.service.kid.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.etammag.icommon.exception.CustomException;
 import com.etammag.dreamlighter.entity.common.Comment;
 import com.etammag.dreamlighter.entity.common.CommentDto;
 import com.etammag.dreamlighter.entity.kid.HotReplyDto;
@@ -13,8 +12,8 @@ import com.etammag.dreamlighter.mapper.kid.HotReplyMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyHotCommentMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyHotLikeMapper;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.kid.HotReplyService;
+import com.etammag.icommon.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -63,12 +62,11 @@ public class HotReplyServiceImpl implements HotReplyService {
     }
 
     @Override
-    public List<HotReplyDto> getAll() {
+    public List<HotReplyDto> getAll(Long kidId) {
         List<HotReplyDto> hots = JSON.parseArray(stringRedisTemplate.opsForValue().get(allKey), HotReplyDto.class);
         if (hots == null || hots.isEmpty()) return new LinkedList<>();
-        String kidId = BaseInfoContext.get().getId().toString();
         for (HotReplyDto hot : hots) {
-            hot.setLiked(stringRedisTemplate.opsForSet().isMember(likeKeyPrefix + hot.getHotId(), kidId));
+            hot.setLiked(stringRedisTemplate.opsForSet().isMember(likeKeyPrefix + hot.getHotId(), kidId.toString()));
             Long size = stringRedisTemplate.opsForSet().size(likeKeyPrefix + hot.getHotId());
             hot.setLikeNum(size == null ? 0 : size.intValue());
         }
@@ -76,14 +74,14 @@ public class HotReplyServiceImpl implements HotReplyService {
     }
 
     @Override
-    public void like(long hotId) {
-        Long num = stringRedisTemplate.opsForSet().add(likeKeyPrefix + hotId, BaseInfoContext.get().getId().toString());
+    public void like(Long kidId, long hotId) {
+        Long num = stringRedisTemplate.opsForSet().add(likeKeyPrefix + hotId, kidId.toString());
         if (num == null || num == 0) throw new CustomException("不能重复点赞");
     }
 
     @Override
-    public void unlike(long hotId) {
-        Long num = stringRedisTemplate.opsForSet().remove(likeKeyPrefix + hotId, BaseInfoContext.get().getId().toString());
+    public void unlike(Long kidId, long hotId) {
+        Long num = stringRedisTemplate.opsForSet().remove(likeKeyPrefix + hotId, kidId.toString());
         if (num == null || num == 0) throw new CustomException("并未点赞");
     }
 
@@ -99,8 +97,8 @@ public class HotReplyServiceImpl implements HotReplyService {
     }
 
     @Override
-    public void addComment(long hotId, String content) {
-        Kid kid = kidMapper.selectById(BaseInfoContext.get().getId());
+    public void addComment(Long kidId, long hotId, String content) {
+        Kid kid = kidMapper.selectById(kidId);
         stringRedisTemplate.opsForList().leftPush(
                 commentKeyPrefix + hotId,
                 JSON.toJSONString(new CommentDto(content, kid.getName(), kid.getPhoto(), LocalDateTime.now())));

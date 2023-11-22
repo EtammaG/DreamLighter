@@ -1,8 +1,5 @@
 package com.etammag.dreamlighter.service.kid.impl;
 
-import com.etammag.icommon.context.BaseInfoContext;
-import com.etammag.icommon.exception.CustomException;
-import com.etammag.icommon.utils.redis.CacheUtil;
 import com.etammag.dreamlighter.entity.kid.AwardDto;
 import com.etammag.dreamlighter.entity.kid.AwardExchangeDto;
 import com.etammag.dreamlighter.entity.kid.db.*;
@@ -12,6 +9,8 @@ import com.etammag.dreamlighter.mapper.kid.mp.AwardLikeMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.AwardTypeMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.service.kid.AwardService;
+import com.etammag.icommon.exception.CustomException;
+import com.etammag.icommon.utils.redis.CacheUtil;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,32 +62,32 @@ public class AwardServiceImpl implements AwardService {
     }
 
     @Override
-    public IPageInfo<AwardDto> search(IPage iPage, Long typeId, String name) {
-        return awardInfoMapper.searchP(iPage, BaseInfoContext.get().getId(), name, typeId);
+    public IPageInfo<AwardDto> search(IPage iPage, Long kidId, Long typeId, String name) {
+        return awardInfoMapper.searchP(iPage, kidId, name, typeId);
     }
 
     @Override
-    public void like(long awardId) {
-        AwardLike awardLike = new AwardLike(awardId, BaseInfoContext.get().getId());
+    public void like(Long kidId, long awardId) {
+        AwardLike awardLike = new AwardLike(awardId, kidId);
         if (awardLikeMapper.cat(awardLike) != null) throw new CustomException("不能重复收藏");
         awardLikeMapper.insert(awardLike);
     }
 
     @Override
-    public IPageInfo<Award> getLike(IPage iPage) {
-        return awardInfoMapper.selectLikeP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<Award> getLike(IPage iPage, Long kidId) {
+        return awardInfoMapper.selectLikeP(iPage, kidId);
     }
 
     @Override
-    public void exchange(long awardId) {
-        Kid kid = kidMapper.selectById(BaseInfoContext.get().getId());
+    public void exchange(Long kidId, long awardId) {
+        Kid kid = kidMapper.selectById(kidId);
         awardExchangeMapper.insert(
                 new AwardExchange(awardId, kid.getId(), kid.getAddress(), LocalDateTime.now()));
     }
 
     @Override
-    public IPageInfo<AwardExchangeDto> getExchange(IPage iPage) {
-        return awardInfoMapper.selectExchangesP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<AwardExchangeDto> getExchange(IPage iPage, Long kidId) {
+        return awardInfoMapper.selectExchangesP(iPage, kidId);
     }
 
 }

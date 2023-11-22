@@ -14,7 +14,6 @@ import com.etammag.dreamlighter.mapper.kid.KidInfoMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.KidMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.SchoolMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.TypeMapper;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.kid.KidInfoService;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
@@ -116,8 +115,8 @@ public class KidInfoServiceImpl implements KidInfoService {
     }
 
     @Override
-    public KidMisDto getMis() {
-        Kid kid = kidMapper.selectById(BaseInfoContext.get().getId());
+    public KidMisDto getMis(Long kidId) {
+        Kid kid = kidMapper.selectById(kidId);
         List<Map<String, Object>> maps = kidInfoMapper.selectMisInfo(kid.getId());
         int subMissionWaiting = 0;
         int subMissionDone = 0;
@@ -142,13 +141,13 @@ public class KidInfoServiceImpl implements KidInfoService {
     }
 
     @Override
-    public KidMalDto getMal() {
-        return kidInfoMapper.selectMalInfo(BaseInfoContext.get().getId());
+    public KidMalDto getMal(Long kidId) {
+        return kidInfoMapper.selectMalInfo(kidId);
     }
 
     @Override
-    public KidMeeDto getMee() {
-        Kid kid = kidMapper.selectById(BaseInfoContext.get().getId());
+    public KidMeeDto getMee(Long kidId) {
+        Kid kid = kidMapper.selectById(kidId);
         KidMeeDto kidMeeDto = new KidMeeDto();
         BeanUtils.copyProperties(kid, kidMeeDto);
         Integer a = kidDonationMapper.selectTotalAmountByKidId(kid.getId());
@@ -159,8 +158,8 @@ public class KidInfoServiceImpl implements KidInfoService {
     }
 
     @Override
-    public KidRecDto getRec() {
-        return toKidRecDto(kidMapper.selectById(BaseInfoContext.get().getId()));
+    public KidRecDto getRec(Long kidId) {
+        return toKidRecDto(kidMapper.selectById(kidId));
     }
 
     @Transactional

@@ -9,17 +9,17 @@ import com.etammag.pagehelper.IPageInfo;
 
 public interface DonorDonationService {
 
-    void addMoney(Long kidId, int amount);
+    void addMoney(Long donorId, Long kidId, int amount);
 
-    void addThing(Long kidId, String name);
+    void addThing(Long donorId, Long kidId, String name);
 
-    void addProject(Long projectId, int amount);
+    void addProject(Long donorId, Long projectId, int amount);
 
-    DonationStaDto getStatistic();
+    DonationStaDto getStatistic(Long donorId);
 
-    IPageInfo<KidDonationDto> getMoney(IPage iPage);
+    IPageInfo<KidDonationDto> getMoney(IPage iPage, Long donorId);
 
-    IPageInfo<KidThingDto> getThing(IPage iPage);
+    IPageInfo<KidThingDto> getThing(IPage iPage, Long donorId);
 
-    IPageInfo<ProjectDonationDto> getProject(IPage iPage);
+    IPageInfo<ProjectDonationDto> getProject(IPage iPage, Long donorId);
 }

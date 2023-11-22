@@ -7,14 +7,14 @@ import com.etammag.dreamlighter.entity.kid.HotReplyDto;
 import java.util.List;
 
 public interface HotReplyService {
-    List<HotReplyDto> getAll();
+    List<HotReplyDto> getAll(Long kidId);
 
-    void like(long hotId);
+    void like(Long kidId, long hotId);
 
-    void unlike(long hotId);
+    void unlike(Long kidId, long hotId);
 
     List<CommentDto> getComment(String hotId);
 
-    void addComment(long hotId, String comment);
+    void addComment(Long kidId, long hotId, String comment);
 
 }

@@ -1,11 +1,12 @@
 package com.etammag.dreamlighter.controller.kid;
 
-import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.AwardDto;
 import com.etammag.dreamlighter.entity.kid.AwardExchangeDto;
 import com.etammag.dreamlighter.entity.kid.db.Award;
 import com.etammag.dreamlighter.entity.kid.db.AwardType;
 import com.etammag.dreamlighter.service.kid.AwardService;
+import com.etammag.icommon.context.BaseInfoContext;
+import com.etammag.icommon.entity.Result;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
 import io.swagger.annotations.Api;
@@ -43,33 +44,33 @@ public class KidAwardController {
                 Integer.parseInt(map.get("pageNum")),
                 Integer.parseInt(map.get("pageSize")),
                 map.get("orderBy"));
-        return Result.success(awardService.search(iPage, Long.parseLong(map.get("typeId")), map.get("name")));
+        return Result.success(awardService.search(iPage, BaseInfoContext.get().getId(), Long.parseLong(map.get("typeId")), map.get("name")));
     }
 
     @PostMapping("/like")
     @ApiOperation("收藏奖品")
     public Result<Object> addLike(@RequestBody Map<String, String> map) {
-        awardService.like(Long.parseLong(map.get("awardId")));
+        awardService.like(BaseInfoContext.get().getId(), Long.parseLong(map.get("awardId")));
         return Result.success();
     }
 
     @GetMapping("/like")
     @ApiOperation("获得收藏的奖品")
     public Result<IPageInfo<Award>> getLike(IPage iPage) {
-        return Result.success(awardService.getLike(iPage));
+        return Result.success(awardService.getLike(iPage, BaseInfoContext.get().getId()));
     }
 
     @PostMapping("/exchange")
     @ApiOperation("兑换奖品")
     public Result<Object> addExchange(@RequestBody Map<String, String> map) {
-        awardService.exchange(Long.parseLong(map.get("awardId")));
+        awardService.exchange(BaseInfoContext.get().getId(), Long.parseLong(map.get("awardId")));
         return Result.success();
     }
 
     @GetMapping("/exchange")
     @ApiOperation("获得兑换奖品的记录")
     public Result<IPageInfo<AwardExchangeDto>> getExchange(IPage iPage) {
-        return Result.success(awardService.getExchange(iPage));
+        return Result.success(awardService.getExchange(iPage, BaseInfoContext.get().getId()));
     }
 
 

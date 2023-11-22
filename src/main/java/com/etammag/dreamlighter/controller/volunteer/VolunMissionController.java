@@ -1,13 +1,14 @@
 package com.etammag.dreamlighter.controller.volunteer;
 
 import com.etammag.dreamlighter.entity.kid.db.Reply;
-import com.etammag.dreamlighter.entity.volunteer.VolunMisDto;
-import com.etammag.dreamlighter.service.volunteer.VolunInfoService;
-import com.etammag.icommon.entity.Result;
-import com.etammag.dreamlighter.entity.mission.ReplyVieDto;
 import com.etammag.dreamlighter.entity.mission.MissionDto;
 import com.etammag.dreamlighter.entity.mission.MissionVolViewDto;
+import com.etammag.dreamlighter.entity.mission.ReplyVieDto;
+import com.etammag.dreamlighter.entity.volunteer.VolunMisDto;
+import com.etammag.dreamlighter.service.volunteer.VolunInfoService;
 import com.etammag.dreamlighter.service.volunteer.VolunMissionService;
+import com.etammag.icommon.context.BaseInfoContext;
+import com.etammag.icommon.entity.Result;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
 import io.swagger.annotations.Api;
@@ -43,7 +44,7 @@ public class VolunMissionController {
     @PostMapping(value = "/page")
     @ApiOperation(value = "志愿者端任务列表")
     public Result<IPageInfo<MissionVolViewDto>> getAllMission(@RequestBody IPage iPage) {
-        return Result.success(volunMissionService.pageAll(iPage));
+        return Result.success(volunMissionService.pageAll(iPage, BaseInfoContext.get().getId()));
     }
 
     @PostMapping(value = "/reply/{missionId}")

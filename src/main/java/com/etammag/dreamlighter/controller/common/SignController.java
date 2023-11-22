@@ -1,5 +1,6 @@
 package com.etammag.dreamlighter.controller.common;
 
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.limit.IpLimit;
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.service.common.SignService;
@@ -39,7 +40,7 @@ public class SignController {
     @PostMapping("/signout")
     @PreAuthorize("hasAuthority('LOGIN')")
     public Result<Object> logout() {
-        signService.logout();
+        signService.logout(BaseInfoContext.get());
         return Result.success();
     }
 }

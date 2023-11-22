@@ -20,12 +20,12 @@ public interface KidInfoService {
 
     IPageInfo<KidSimDto> getSim(IPage iPage);
 
-    KidMisDto getMis();
+    KidMisDto getMis(Long kidId);
 
-    KidMalDto getMal();
+    KidMalDto getMal(Long kidId);
 
-    KidMeeDto getMee();
+    KidMeeDto getMee(Long kidId);
 
-    KidRecDto getRec();
+    KidRecDto getRec(Long kidId);
 
 }

@@ -3,7 +3,7 @@ package com.etammag.dreamlighter.service.kid;
 import com.etammag.dreamlighter.entity.kid.db.Reply;
 
 public interface ReplyService {
-    Reply getByKidIdAndMissionId(String missionId);
+    Reply getByKidIdAndMissionId(Long kidId, String missionId);
 
-    void add(Long missionId, String replyMedia);
+    void add(Long kidId, Long missionId, String replyMedia);
 }

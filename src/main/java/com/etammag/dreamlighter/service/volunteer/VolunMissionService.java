@@ -10,7 +10,7 @@ import com.etammag.pagehelper.IPageInfo;
 
 public interface VolunMissionService {
 
-    IPageInfo<MissionVolViewDto> pageAll(IPage iPage);
+    IPageInfo<MissionVolViewDto> pageAll(IPage iPage, Long volunId);
 
     IPageInfo<ReplyVieDto> getReplyVie(IPage iPage, Long missionId);
 

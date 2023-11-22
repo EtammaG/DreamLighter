@@ -6,5 +6,5 @@ import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
 
 public interface VolunKidService {
-    IPageInfo<Kid> pageAll(IPage iPage);
+    IPageInfo<Kid> pageAll(IPage iPage, Long volunId);
 }

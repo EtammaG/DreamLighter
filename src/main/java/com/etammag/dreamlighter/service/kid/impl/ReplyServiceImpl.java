@@ -1,13 +1,12 @@
 package com.etammag.dreamlighter.service.kid.impl;
 
-import com.etammag.icommon.utils.IdWorker;
 import com.etammag.dreamlighter.entity.kid.db.Reply;
 import com.etammag.dreamlighter.entity.kid.db.ToMission;
 import com.etammag.dreamlighter.mapper.kid.ReplyInfoMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyMapper;
 import com.etammag.dreamlighter.mapper.kid.mp.ToMissionMapper;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.kid.ReplyService;
+import com.etammag.icommon.utils.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +25,14 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public Reply getByKidIdAndMissionId(String missionId) {
-        return replyInfoMapper.selectByKidIdAndMissionId(BaseInfoContext.get().getId(), missionId);
+    public Reply getByKidIdAndMissionId(Long kidId, String missionId) {
+        return replyInfoMapper.selectByKidIdAndMissionId(kidId, missionId);
     }
 
     @Override
-    public void add(Long missionId, String replyMedia) {
+    public void add(Long kidId, Long missionId, String replyMedia) {
         Long replyId = IdWorker.nextId();
         replyMapper.insert(new Reply(replyId, replyMedia, null, null));
-        toMissionMapper.updateReply(new ToMission(BaseInfoContext.get().getId(), missionId, replyId));
+        toMissionMapper.updateReply(new ToMission(kidId, missionId, replyId));
     }
 }

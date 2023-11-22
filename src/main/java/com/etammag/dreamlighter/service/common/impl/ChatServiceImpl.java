@@ -32,10 +32,6 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public SseEmitter receive(Long fromId) {
-        return receive(fromId, BaseInfoContext.get());
-    }
-
     public SseEmitter receive(Long fromId, BaseInfo to) {
         if (to.getType() != 2 && to.getType() != 3) return null;
         SseEmitter sseEmitter = new SseEmitter(-1L);
@@ -60,10 +56,6 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public void send(Long toId, String msg) {
-        send(BaseInfoContext.get(), toId, msg);
-    }
-
     public void send(BaseInfo from, Long toId, String msg) {
         Re re = new Re(toId, from.getType() == 2 ? 1 : 0);
         SseEmitter sseEmitter = session.get(re);

@@ -13,14 +13,14 @@ import java.util.List;
 public interface AwardService {
     List<AwardType> getAllType();
 
-    IPageInfo<AwardDto> search(IPage iPage, Long typeId, String name);
+    IPageInfo<AwardDto> search(IPage iPage, Long kidId, Long typeId, String name);
 
-    void like(long awardId);
+    void like(Long kidId, long awardId);
 
-    IPageInfo<Award> getLike(IPage iPage);
+    IPageInfo<Award> getLike(IPage iPage, Long kidId);
 
-    void exchange(long awardId);
+    void exchange(Long kidId, long awardId);
 
-    IPageInfo<AwardExchangeDto> getExchange(IPage iPage);
+    IPageInfo<AwardExchangeDto> getExchange(IPage iPage, Long kidId);
 
 }

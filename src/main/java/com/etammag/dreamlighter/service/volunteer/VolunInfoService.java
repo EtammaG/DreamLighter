@@ -4,7 +4,7 @@ import com.etammag.dreamlighter.entity.volunteer.VolunMisDto;
 import com.etammag.dreamlighter.entity.volunteer.db.Volunteer;
 
 public interface VolunInfoService {
-    Volunteer getVolunteerInfo();
+    Volunteer getVolunteerInfo(Long volunId);
 
-    VolunMisDto getVolunMisInfo();
+    VolunMisDto getVolunMisInfo(Long volunId);
 }

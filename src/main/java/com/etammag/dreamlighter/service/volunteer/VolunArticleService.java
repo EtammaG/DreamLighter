@@ -19,17 +19,17 @@ public interface VolunArticleService {
 
     List<CommentDto> getCommentById(Long id);
 
-    void addComment(Long articleId, String content);
+    void addComment(Long volunId, Long articleId, String content);
 
 
-    IPageInfo<Article> pageFavors(IPage iPage);
+    IPageInfo<Article> pageFavors(IPage iPage, Long volunId);
 
-    void addFavor(Long articleId);
+    void addFavor(Long volunId, Long articleId);
 
-    void delFavor(Long articleId);
+    void delFavor(Long volunId, Long articleId);
 
-    void addLike(Long articleId);
+    void addLike(Long volunId, Long articleId);
 
-    void delLike(Long articleId);
+    void delLike(Long volunId, Long articleId);
 
 }

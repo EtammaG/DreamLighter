@@ -1,5 +1,6 @@
 package com.etammag.dreamlighter.controller.kid;
 
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.mission.MissionDto;
 import com.etammag.dreamlighter.entity.mission.MissionKidViewDto;
@@ -33,7 +34,7 @@ public class KidMissionController {
     @GetMapping("/date/{date}")
     @ApiOperation("获取指定date的mission列表")
     public Result<List<MissionKidViewDto>> date(@PathVariable @ApiParam(value = "日期") String date) {
-        return Result.success(missionInfoService.getKidViewByKidIdAndDate(LocalDate.parse(date)));
+        return Result.success(missionInfoService.getKidViewByKidIdAndDate(BaseInfoContext.get().getId(), LocalDate.parse(date)));
     }
 
     @GetMapping("/{id}")

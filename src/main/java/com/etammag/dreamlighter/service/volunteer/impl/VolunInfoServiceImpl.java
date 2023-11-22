@@ -22,12 +22,12 @@ public class VolunInfoServiceImpl implements VolunInfoService {
     }
 
     @Override
-    public Volunteer getVolunteerInfo() {
-        return volunteerMapper.selectById(BaseInfoContext.get().getId());
+    public Volunteer getVolunteerInfo(Long volunId) {
+        return volunteerMapper.selectById(volunId);
     }
 
     @Override
-    public VolunMisDto getVolunMisInfo() {
-        return volunToMissionMapper.selectVolunMisDto(BaseInfoContext.get().getId());
+    public VolunMisDto getVolunMisInfo(Long volunId) {
+        return volunToMissionMapper.selectVolunMisDto(volunId);
     }
 }

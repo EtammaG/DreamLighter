@@ -1,5 +1,6 @@
 package com.etammag.dreamlighter.controller.common;
 
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.service.common.ChatService;
 import io.swagger.annotations.Api;
@@ -27,7 +28,7 @@ public class ChatController {
     @GetMapping("/receive/{id}")
     @PreAuthorize("hasAuthority('LOGIN')")
     public SseEmitter receive(@PathVariable String id) {
-        return chatService.receive(Long.valueOf(id));
+        return chatService.receive(Long.valueOf(id), BaseInfoContext.get());
 
     }
 
@@ -36,7 +37,7 @@ public class ChatController {
     public Result<Object> send(@RequestBody Map<String, String> map) {
         String id = map.get("id");
         String msg = map.get("msg");
-        chatService.send(Long.valueOf(id), msg);
+        chatService.send(BaseInfoContext.get(), Long.valueOf(id), msg);
         return Result.success();
     }
 

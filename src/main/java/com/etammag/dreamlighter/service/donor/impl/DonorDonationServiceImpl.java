@@ -12,7 +12,6 @@ import com.etammag.dreamlighter.mapper.donor.DonationStatisticMapper;
 import com.etammag.dreamlighter.mapper.donor.mp.KidDonationMapper;
 import com.etammag.dreamlighter.mapper.donor.mp.KidThingMapper;
 import com.etammag.dreamlighter.mapper.donor.mp.ProjectDonationMapper;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.donor.DonorDonationRankService;
 import com.etammag.dreamlighter.service.donor.DonorDonationService;
 import com.etammag.pagehelper.IPage;
@@ -47,8 +46,7 @@ public class DonorDonationServiceImpl implements DonorDonationService {
 
     @Override
     @Transactional
-    public void addMoney(Long kidId, int amount) {
-        Long donorId = BaseInfoContext.get().getId();
+    public void addMoney(Long donorId, Long kidId, int amount) {
         kidDonationMapper.insert(new KidDonation(
                 donorId,
                 kidId,
@@ -59,8 +57,7 @@ public class DonorDonationServiceImpl implements DonorDonationService {
 
     @Override
     @Transactional
-    public void addThing(Long kidId, String name) {
-        Long donorId = BaseInfoContext.get().getId();
+    public void addThing(Long donorId, Long kidId, String name) {
         kidThingMapper.insert(new KidThing(
                 donorId,
                 kidId,
@@ -70,8 +67,7 @@ public class DonorDonationServiceImpl implements DonorDonationService {
 
     @Override
     @Transactional
-    public void addProject(Long projectId, int amount) {
-        Long donorId = BaseInfoContext.get().getId();
+    public void addProject(Long donorId, Long projectId, int amount) {
         projectDonationMapper.insert(new ProjectDonation(
                 projectId,
                 donorId,
@@ -82,23 +78,23 @@ public class DonorDonationServiceImpl implements DonorDonationService {
     }
 
     @Override
-    public DonationStaDto getStatistic() {
-        return donationStatisticMapper.selectSta(BaseInfoContext.get().getId());
+    public DonationStaDto getStatistic(Long donorId) {
+        return donationStatisticMapper.selectSta(donorId);
     }
 
     @Override
-    public IPageInfo<KidDonationDto> getMoney(IPage iPage) {
-        return donationMapper.selectKidDonationP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<KidDonationDto> getMoney(IPage iPage, Long donorId) {
+        return donationMapper.selectKidDonationP(iPage, donorId);
     }
 
     @Override
-    public IPageInfo<KidThingDto> getThing(IPage iPage) {
-        return donationMapper.selectKidThingP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<KidThingDto> getThing(IPage iPage, Long donorId) {
+        return donationMapper.selectKidThingP(iPage, donorId);
     }
 
     @Override
-    public IPageInfo<ProjectDonationDto> getProject(IPage iPage) {
-        return donationMapper.selectProjectDonationP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<ProjectDonationDto> getProject(IPage iPage, Long donorId) {
+        return donationMapper.selectProjectDonationP(iPage, donorId);
     }
 
 }

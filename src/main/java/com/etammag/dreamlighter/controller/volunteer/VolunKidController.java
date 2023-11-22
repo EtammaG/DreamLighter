@@ -1,6 +1,7 @@
 package com.etammag.dreamlighter.controller.volunteer;
 
 import com.etammag.dreamlighter.service.kid.KidInfoService;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.KidRecDto;
 import com.etammag.dreamlighter.entity.kid.db.Kid;
@@ -43,7 +44,7 @@ public class VolunKidController {
     @GetMapping(value = "/all")
     @ApiOperation(value = "孩子信息列表")
     public Result<IPageInfo<Kid>> getAll(@RequestBody IPage iPage) {
-        return Result.success(volunKidService.pageAll(iPage));
+        return Result.success(volunKidService.pageAll(iPage, BaseInfoContext.get().getId()));
     }
 
 

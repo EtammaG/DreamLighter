@@ -6,7 +6,6 @@ import com.etammag.dreamlighter.entity.mission.MissionKidViewDto;
 import com.etammag.dreamlighter.entity.mission.db.Mission;
 import com.etammag.dreamlighter.mapper.mission.MissionInfoMapper;
 import com.etammag.dreamlighter.mapper.mission.mp.MissionMapper;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.dreamlighter.service.mission.MissionInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +29,10 @@ public class MissionInfoServiceImpl implements MissionInfoService {
     }
 
     @Override
-    public List<MissionKidViewDto> getKidViewByKidIdAndDate(LocalDate date) {
-        List<Map<String, Object>> maps = missionInfoMapper.selectKidViewByKidIdAndDate(BaseInfoContext.get().getId(), date);
+    public List<MissionKidViewDto> getKidViewByKidIdAndDate(Long kidId, LocalDate date) {
+        List<Map<String, Object>> maps = missionInfoMapper.selectKidViewByKidIdAndDate(kidId, date);
         List<MissionKidViewDto> res = new ArrayList<>(maps.size());
-        for(Map<String, Object> map : maps) {
+        for (Map<String, Object> map : maps) {
             MissionKidViewDto missionKidViewDto = JSON.parseObject(JSON.toJSONString(map), MissionKidViewDto.class);
             missionKidViewDto.setDone(map.get("reply_id") != null);
             missionKidViewDto.setChecked(map.get("score") != null);

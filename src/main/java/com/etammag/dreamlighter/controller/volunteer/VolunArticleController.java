@@ -4,6 +4,7 @@ import com.etammag.dreamlighter.entity.common.CommentDto;
 import com.etammag.dreamlighter.entity.volunteer.ArticleDto;
 import com.etammag.dreamlighter.entity.volunteer.db.Article;
 import com.etammag.dreamlighter.service.volunteer.VolunArticleService;
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.entity.Result;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
@@ -61,41 +62,41 @@ public class VolunArticleController {
     @PostMapping(value = "/comment")
     @ApiOperation("发布评论")
     public Result<Object> getCollectedArticle(@RequestBody Map<String, String> map) {
-        volunArticleService.addComment(Long.parseLong(map.get("articleId")), map.get("content"));
+        volunArticleService.addComment(BaseInfoContext.get().getId(), Long.parseLong(map.get("articleId")), map.get("content"));
         return Result.success();
     }
 
     @GetMapping(value = "/favorite")
     @ApiOperation("被收藏的文章")
     public Result<IPageInfo<Article>> getCollectedArticle(IPage iPage) {
-        return Result.success(volunArticleService.pageFavors(iPage));
+        return Result.success(volunArticleService.pageFavors(iPage, BaseInfoContext.get().getId()));
     }
 
     @PostMapping(value = "/favorite/{articleId}")
     @ApiOperation("添加文章收藏")
     public Result<String> putArticleFavorite(@PathVariable String articleId) {
-        volunArticleService.addFavor(Long.valueOf(articleId));
+        volunArticleService.addFavor(BaseInfoContext.get().getId(), Long.valueOf(articleId));
         return Result.success();
     }
 
     @DeleteMapping(value = "/favorite/{articleId}")
     @ApiOperation("取消收藏")
     public Result<String> deleteArticleFavorite(@PathVariable String articleId) {
-        volunArticleService.delFavor(Long.parseLong(articleId));
+        volunArticleService.delFavor(BaseInfoContext.get().getId(), Long.parseLong(articleId));
         return Result.success();
     }
 
     @PostMapping(value = "/like/{articleId}")
     @ApiOperation("给文章点赞")
     public Result<String> putArticleLove(@PathVariable String articleId) {
-        volunArticleService.addLike(Long.parseLong(articleId));
+        volunArticleService.addLike(BaseInfoContext.get().getId(), Long.parseLong(articleId));
         return Result.success();
     }
 
     @DeleteMapping(value = "/like/{articleId}")
     @ApiOperation("取消点赞")
     public Result<String> deleteArticleLove(@PathVariable String articleId) {
-        volunArticleService.delLike(Long.parseLong(articleId));
+        volunArticleService.delLike(BaseInfoContext.get().getId(), Long.parseLong(articleId));
         return Result.success("取消成功");
     }
 

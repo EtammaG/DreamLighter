@@ -1,5 +1,6 @@
 package com.etammag.dreamlighter.controller.kid;
 
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.kid.db.Reply;
 import com.etammag.dreamlighter.service.kid.ReplyService;
@@ -28,13 +29,14 @@ public class KidReplyController {
     @GetMapping("/{missionId}")
     @ApiOperation("获取任务的答题情况")
     public Result<Reply> getByMission(@PathVariable @ApiParam(value = "任务ID") String missionId) {
-        return Result.success(replyService.getByKidIdAndMissionId(missionId));
+        return Result.success(replyService.getByKidIdAndMissionId(BaseInfoContext.get().getId(), missionId));
     }
 
     @PostMapping
     @ApiOperation("答题")
     public Result<Object> post(@RequestBody Map<String, String> map) {
         replyService.add(
+                BaseInfoContext.get().getId(),
                 Long.valueOf(map.get("missionId")),
                 map.get("replyMedia"));
         return Result.success();

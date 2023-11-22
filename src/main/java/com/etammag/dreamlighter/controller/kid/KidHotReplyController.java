@@ -1,5 +1,6 @@
 package com.etammag.dreamlighter.controller.kid;
 
+import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.common.CommentDto;
 import com.etammag.dreamlighter.entity.kid.HotReplyDto;
@@ -30,13 +31,13 @@ public class KidHotReplyController {
     @GetMapping
     @ApiOperation("获取热门提交列表")
     public Result<List<HotReplyDto>> get() {
-        return Result.success(hotReplyService.getAll());
+        return Result.success(hotReplyService.getAll(BaseInfoContext.get().getId()));
     }
 
     @PostMapping("/like")
     @ApiOperation("对热门提交点赞")
     public Result<Object> like(@RequestBody Map<String, String> map) {
-        hotReplyService.like(Long.parseLong(map.get("hotId")));
+        hotReplyService.like(BaseInfoContext.get().getId(), Long.parseLong(map.get("hotId")));
         return Result.success();
     }
 
@@ -44,7 +45,7 @@ public class KidHotReplyController {
     @ApiOperation("对热门提交取消点赞")
     public Result<Object> unlike(@RequestBody Map<String, String> map) {
         String hotId = map.get("hotId");
-        hotReplyService.unlike(Long.parseLong(hotId));
+        hotReplyService.unlike(BaseInfoContext.get().getId(), Long.parseLong(hotId));
         return Result.success();
     }
 
@@ -59,7 +60,7 @@ public class KidHotReplyController {
     public Result<Object> addComment(@RequestBody Map<String, String> map) {
         String hotId = map.get("hotId");
         String comment = map.get("content");
-        hotReplyService.addComment(Long.parseLong(hotId), comment);
+        hotReplyService.addComment(BaseInfoContext.get().getId(), Long.parseLong(hotId), comment);
         return Result.success();
     }
 

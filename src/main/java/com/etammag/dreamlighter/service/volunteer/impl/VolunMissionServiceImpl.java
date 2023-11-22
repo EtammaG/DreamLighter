@@ -7,7 +7,6 @@ import com.etammag.dreamlighter.entity.mission.ReplyVieDto;
 import com.etammag.dreamlighter.mapper.kid.mp.ReplyMapper;
 import com.etammag.dreamlighter.mapper.volunteer.MissionStatisticMapper;
 import com.etammag.dreamlighter.service.volunteer.VolunMissionService;
-import com.etammag.icommon.context.BaseInfoContext;
 import com.etammag.pagehelper.IPage;
 import com.etammag.pagehelper.IPageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class VolunMissionServiceImpl implements VolunMissionService {
     }
 
     @Override
-    public IPageInfo<MissionVolViewDto> pageAll(IPage iPage) {
-        return missionStatisticMapper.selectVolViewsP(iPage, BaseInfoContext.get().getId());
+    public IPageInfo<MissionVolViewDto> pageAll(IPage iPage, Long volunId) {
+        return missionStatisticMapper.selectVolViewsP(iPage, volunId);
     }
 
     @Override
