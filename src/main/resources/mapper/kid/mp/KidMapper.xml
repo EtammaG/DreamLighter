@@ -31,5 +31,12 @@
         from kid
         limit #{num}
     </select>
+    <select id="selectByVolunId" resultType="com.etammag.dreamlighter.entity.kid.db.Kid">
+        select k.*
+        from kid k
+        join volun_to_kid t
+        on k.id = t.kid_id
+        where t.volun_id = #{volunId}
+    </select>
 
 </mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etammag.dreamlighter.mapper.volunteer.MissionStatisticMapper">
+
+
+    <select id="selectVolViews" resultType="com.etammag.dreamlighter.entity.mission.MissionVolViewDto">
+        select m.id, m.title,
+            count(ktm.reply_id) total_submit,
+            count(case when score is not null then true end) waiting_check
+        from kid_mission m
+            join kid_to_mission ktm
+                on m.id = ktm.mission_id
+            join kid_reply r
+                on ktm.reply_id = r.id
+            join volun_to_mission vtm
+                on m.id = vtm.mission_id
+        where vtm.volun_id = #{volunId}
+        group by m.id
+    </select>
+    <select id="selectReplyVie" resultType="com.etammag.dreamlighter.entity.mission.ReplyVieDto">
+        select r.*, k.photo kid_pic, k.name kid_name
+        from kid_to_mission ktm
+        join kid_reply r
+        on ktm.reply_id = r.id
+        join kid k
+        on ktm.kid_id = k.id
+        where ktm.mission_id = #{missionId}
+    </select>
+    <select id="selectDtoById" resultType="com.etammag.dreamlighter.entity.mission.MissionDto">
+        select m.*, count(*) totalNum, count(case when reply_id is not null then true end) doneNum
+        from kid_mission m
+        join kid_to_mission ktm
+        on m.id = ktm.mission_id
+        where m.id = #{missionId}
+    </select>
+</mapper>

@@ -2,7 +2,7 @@ package com.etammag.dreamlighter.controller.volunteer;
 
 import com.etammag.icommon.entity.Result;
 import com.etammag.dreamlighter.entity.volunteer.db.Volunteer;
-import com.etammag.dreamlighter.service.volunteer.VolunteerInfoService;
+import com.etammag.dreamlighter.service.volunteer.VolunInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/volunteer")
 @PreAuthorize("hasAuthority('VOLUNTEER')")
 @Api(tags = "志愿者端相关信息接口")
-public class VolunteerInfoController {
+public class VolunInfoController {
 
-    private final VolunteerInfoService volunteerInfoService;
+    private final VolunInfoService volunInfoService;
 
     @Autowired
-    public VolunteerInfoController(VolunteerInfoService volunteerInfoService) {
-        this.volunteerInfoService = volunteerInfoService;
+    public VolunInfoController(VolunInfoService volunInfoService) {
+        this.volunInfoService = volunInfoService;
     }
 
-    @GetMapping(value = "/info", produces = "application/json; charset=utf-8")
+    @GetMapping(value = "/info")
     @ApiOperation(value = "志愿者信息")
     public Result<Volunteer> getVolunInfo() {
-        return Result.success(volunteerInfoService.getVolunteerInfo());
+        return Result.success(volunInfoService.getVolunteerInfo());
     }
 
 }

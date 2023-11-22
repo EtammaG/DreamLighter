@@ -10,4 +10,10 @@
         <result column="comment" property="comment" />
     </resultMap>
 
+    <update id="insertScore">
+        update kid_reply
+        set score = #{score}, comment = #{comment}
+        where id = #{id};
+    </update>
+
 </mapper>

@@ -1,5 +1,6 @@
-package com.etammag.dreamlighter.entity.kid;
+package com.etammag.dreamlighter.entity.mission;
 
+import com.etammag.dreamlighter.entity.kid.db.Reply;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -12,16 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "KidVieDto", description = "志愿者端中每一个任务的未被批改的孩子信息")
-public class KidVieDto {
+public class ReplyVieDto extends Reply {
 
-    @ApiModelProperty("孩子的id")
-    private Long kidId;
     @ApiModelProperty("孩子的照片")
     private String kidPic;
     @ApiModelProperty("孩子的名称")
     private String kidName;
-    @ApiModelProperty("孩子提交文件")
-    private String replyFile;
-
 
 }

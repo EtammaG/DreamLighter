@@ -4,8 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.volunteer.db.VolunToMission">
-        <result column="volun_id" property="volunId" />
-        <result column="mission_id" property="missionId" />
+        <result column="volun_id" property="volunId"/>
+        <result column="mission_id" property="missionId"/>
     </resultMap>
+
+    <select id="selectVolunMisDto" resultType="com.etammag.dreamlighter.entity.volunteer.VolunMisDto">
+        select
+        count(*) total_mission_count,
+        count(case when done = true then true end) done_mission_count
+        from volun_to_mission
+        where volun_id = #{id}
+    </select>
 
 </mapper>

@@ -12,5 +12,16 @@
         <result column="content" property="content" />
         <result column="article_time" property="articleTime" />
     </resultMap>
+    <select id="selectRandoms" resultType="com.etammag.dreamlighter.entity.volunteer.db.Article">
+        select *
+        from volun_article limit #{num}
+    </select>
+    <select id="selectAllByTitle" resultType="com.etammag.dreamlighter.entity.volunteer.db.Article">
+        select *
+        from volun_article
+        <if test="title != null">
+            where title like #{title}
+        </if>
+    </select>
 
 </mapper>

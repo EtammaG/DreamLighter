@@ -8,4 +8,16 @@
         <result column="article_id" property="articleId" />
     </resultMap>
 
+    <select id="catLike" resultType="java.lang.Integer">
+        select 1
+        from article_like
+        where volun_id = #{volunId} and article_id = #{articleId}
+        limit 1
+    </select>
+
+    <delete id="delete">
+        delete from article_like
+        where volun_id = #{volunId} and article_id = #{articleId}
+    </delete>
+
 </mapper>

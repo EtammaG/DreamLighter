@@ -18,5 +18,7 @@ public class VolunToMission {
     @ApiModelProperty("任务ID")
     private Long missionId;
 
+    @ApiModelProperty("是否全部批改")
+    private Boolean done;
 
 }

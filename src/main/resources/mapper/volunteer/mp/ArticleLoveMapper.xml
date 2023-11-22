@@ -6,7 +6,11 @@
     <resultMap id="BaseResultMap" type="com.etammag.dreamlighter.entity.volunteer.db.ArticleLove">
         <result column="volun_id" property="volunId" />
         <result column="article_id" property="articleId" />
-        <result column="love_id" property="loveId" />
     </resultMap>
+    <delete id="delete">
+        delete from volun_article_like
+        where volun_id = #{volunId}
+        and article_id = #{articleId}
+    </delete>
 
 </mapper>
